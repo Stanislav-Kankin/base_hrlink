@@ -8,7 +8,9 @@ def load_knowledge_base():
     """Загружает базу знаний из файла"""
     try:
         with open(Path(__file__).parent / 'base.txt', 'r', encoding='utf-8') as f:
-            return f.read()
+            content = f.read()
+            print("База знаний загружена успешно.")
+            return content
     except Exception as e:
         print(f"Ошибка загрузки базы знаний: {e}")
         return ""
