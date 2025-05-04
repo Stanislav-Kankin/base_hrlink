@@ -1,34 +1,36 @@
-import requests
+import aiohttp
 from config import config
 from utils.logging import logger
 
 
-def get_balance() -> float:
+async def get_balance() -> float:
     """
     Получает текущий баланс аккаунта на ProxyAPI.
     Возвращает баланс в виде числа или None в случае ошибки.
     """
     try:
-        # URL для проверки баланса
-        url = "https://api.proxyapi.ru/proxyapi/balance"
+        async with aiohttp.ClientSession() as session:
+            # Используем правильный endpoint из документации
+            url = "https://api.proxyapi.ru/proxyapi/balance"
+            headers = {
+                "Authorization": f"Bearer {config.PROXY_API_KEY}",
+                "Content-Type": "application/json"
+            }
 
-        # Заголовок с ключом API
-        headers = {
-            "Authorization": f"Bearer {config.PROXY_API_KEY}"
-        }
-
-        # Отправляем GET-запрос
-        response = requests.get(url, headers=headers)
-        error = 'Ошибка при получении баланса:'
-        # Проверяем ответ
-        if response.status_code == 200:
-            balance = response.json().get("balance")
-            return float(balance)  # Преобразуем баланс в число
-        else:
-            logger.error(
-                f"{error} {response.status_code}, {response.text}"
-                )
-            return None
+            async with session.get(url, headers=headers) as response:
+                if response.status == 200:
+                    data = await response.json()
+                    balance = data.get("balance")
+                    if balance is not None:
+                        return float(balance)
+                    logger.error("Баланс не найден в ответе")
+                    return None
+                else:
+                    error_text = await response.text()
+                    logger.error(
+                        f"Ошибка при получении баланса: {response.status}, {error_text}"
+                    )
+                    return None
     except Exception as e:
         logger.error(f"Ошибка при получении баланса: {e}")
         return None
