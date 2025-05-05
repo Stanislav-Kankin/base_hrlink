@@ -6,7 +6,7 @@ import asyncio
 
 client = AsyncOpenAI(
     api_key=config.PROXY_API_KEY,
-    base_url="https://api.proxyapi.ru/openai/v1"
+    base_url="https://api.proxyapi.ru/deepseek"
     )
 
 
@@ -17,7 +17,7 @@ async def get_answer(question: str) -> str:
     """Получает ответ на вопрос из базы знаний"""
     try:
         response = await client.chat.completions.create(
-            model="gpt-4o",
+            model="deepseek-chat",
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
                 {"role": "user", "content": question}
