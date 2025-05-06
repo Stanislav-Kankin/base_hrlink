@@ -59,7 +59,9 @@ async def handle_balance(message: Message):
 
     except Exception as e:
         logger.error(f"Ошибка в обработчике баланса: {e}")
-        await message.answer("⚠️ Произошла внутренняя ошибка при проверке баланса")
+        await message.answer(
+            "⚠️ Произошла внутренняя ошибка при проверке баланса"
+            )
 
 
 @router.message(F.text)

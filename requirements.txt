@@ -4,4 +4,4 @@ python-dotenv==1.0.1
 SQLAlchemy==2.0.37
 tiktoken==0.8.0
 aiohttp==3.11.11
-python-dateutil==2.9.0.post0  # если будете использовать DateTime
+python-dateutil==2.9.0.post0
