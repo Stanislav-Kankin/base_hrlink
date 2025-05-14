@@ -5,16 +5,22 @@ encoding = tiktoken.encoding_for_model("gpt-4o")
 
 
 def load_knowledge_base():
-    """Загружает базу знаний из файла"""
+    """Загружает базу знаний из всех файлов в директории knowledge_base"""
+    knowledge = {}
+    base_dir = Path(__file__).parent / 'knowledge_base'
+
     try:
-        with open(Path(__file__).
-                  parent / 'base.txt', 'r', encoding='utf-8') as f:
-            content = f.read()
-            print("База знаний загружена успешно.")
-            return content
+        for file_path in base_dir.glob('**/*.txt'):
+            # Сохраняем структуру каталогов в ключах
+            relative_path = file_path.relative_to(base_dir)
+            with open(file_path, 'r', encoding='utf-8') as f:
+                knowledge[str(relative_path)] = f.read()
+
+        print(f"База знаний загружена успешно. Загружено {len(knowledge)} файлов.")
+        return knowledge
     except Exception as e:
         print(f"Ошибка загрузки базы знаний: {e}")
-        return ""
+        return {}
 
 
 KNOWLEDGE_BASE = load_knowledge_base()
