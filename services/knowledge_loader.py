@@ -27,7 +27,14 @@ def load_section_knowledge(
             '3': 'employee_3',
             '4': 'signer_4',
             '5': 'sogl_5',
-            '6': 'process_6'
+            '6': 'process_6',
+            '7': 'stl_cadr_7',
+            '8': 'stl_candidat_8',
+            '9': 'stl_9',
+            '10': 'stl_10',
+            '11': 'stl_11',
+            '12': 'stl_12',
+            '13': 'stl_13'
         }
 
         folder = folder_map.get(main_part)
