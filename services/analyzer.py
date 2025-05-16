@@ -148,7 +148,7 @@ STARTLINK:
 Установить индикатор проверки физлица на благонадежность - https://wiki.hr-link.ru/bin/view/Start%20Link/SB-/Kandidaty-/Ustanovitь-indikator-proverki-fizlitsa-na-blagonadezhnostь-/
 Технические требования on-premises Start Link - https://wiki.hr-link.ru/bin/view/Start%20Link/Tekhnicheskie-trebovaniia-on-premises-Start-Link/
 Принять приглашение и заполнить шаблон запроса документов - https://wiki.hr-link.ru/bin/view/Start%20Link/Kandidat-/Priniatь-priglashenie-i-zapolnitь-shablon-zaprosa-dokumentov/
-
+История обновлений разных релизов Start Link и HRlink - https://wiki.hr-link.ru/bin/view/Blog/
 
 чтобы выделить текст жирным используй вместо * звездочки html теги <b>
 
