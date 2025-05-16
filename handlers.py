@@ -73,7 +73,7 @@ async def handle_question(message: Message):
                 )
             return
 
-        await message.bot.answer('Запрос принят, собираю ответ... ⏳')
+        await message.answer("⏳ Ищу ответ...")
         await message.bot.send_chat_action(message.chat.id, "typing")
         answer = await get_answer(message.text)
         await message.answer(answer)
