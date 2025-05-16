@@ -68,7 +68,7 @@ async def get_answer(question: str) -> str:
       раздела, предложи уточнить раздел
     8. чтобы выделить текст жирным используй вместо * звездочки html теги <b>
 
-      При возможности вставляй в сообщение ссылки, в соответстии с темой:
+      При возможности вставляй в сообщение ссылки, в соответстии с темой, старайся смотерть по логике вопроса, возможно понадобится несколько ссылок:
 Перелючение в режим "Сотрудник" - https://wiki.hr-link.ru/bin/view/Main/Kadrovik-/Lichnyi-kabinet-/Perekliuchenie-v-rezhim-«Sotrudnik»-/
 Загрузить документ - https://wiki.hr-link.ru/bin/view/Main/Kadrovik-/Dokumenty-/Zagruzitь-dokument/
 Настроить маршрут согалсования документа - https://wiki.hr-link.ru/bin/view/Main/Kadrovik-/Dokumenty-/Nastroitь-marshrut-soglasovaniia-dokumenta-/
