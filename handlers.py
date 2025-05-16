@@ -37,7 +37,7 @@ async def handle_balance(message: Message):
     """Обработчик команды для запроса текущего баланса"""
     try:
         # Показываем статус "печатает"
-        await message.bot.send_chat_action(message.chat.id, "Запрашиваем баланс, ждите...")
+        await message.bot.send_chat_action(message.chat.id, "typing")
 
         balance = await get_balance()
 
