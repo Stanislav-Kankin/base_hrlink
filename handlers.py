@@ -27,11 +27,12 @@ async def handle_start(message: Message):
 @router.message(Command("help"))
 async def handle_help(message: Message):
     await message.answer(
-        "ℹ️ Я могу ответить на вопросы о:\n"
+        "ℹ️ Я могу ответить на вопросы о:\n\n"
         "- Наших продуктах и услугах\n"
         "- Условиях внедрения\n"
         "- Контактах компании\n"
-        "- Технических характеристиках\n\n"
+        "- Технических характеристиках\n"
+        'Все ответы берутся в <u><b><a href="https://wiki.hr-link.ru/bin/view/Main/">базе знаний</a></b></u>\n\n'
         "Просто напишите ваш вопрос в чат!"
     )
 
