@@ -76,7 +76,10 @@ async def handle_question(message: Message):
             '⏳ Ищу ответ, смотрю в <a href="https://wiki.hr-link.ru/bin/view/Main/">базе знаний</a>, ожидайте...',
             )
         # Отправляем сообщение с HTML-разметкой
-        searching_msg = await message.answer(searching_text)
+        searching_msg = await message.answer(
+            searching_text,
+            disable_web_page_preview=False
+            )
 
         await message.bot.send_chat_action(message.chat.id, "typing")
         answer = await get_answer(message.text)
