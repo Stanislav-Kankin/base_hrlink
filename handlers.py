@@ -73,7 +73,7 @@ async def handle_question(message: Message):
                 )
             return
         searching_text = (
-            '⏳ Ищу ответ, смотрю в <a href="https://wiki.hr-link.ru/bin/view/Main/">базе знаний</a>, ожидайте...',
+            '⏳ Ищу ответ, смотрю в <a href="https://wiki.hr-link.ru/bin/view/Main/">базе знаний</a>, ожидайте...'
             )
         # Отправляем сообщение с HTML-разметкой
         searching_msg = await message.answer(
