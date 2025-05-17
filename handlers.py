@@ -77,8 +77,7 @@ async def handle_question(message: Message):
             )
         # Отправляем сообщение с HTML-разметкой
         searching_msg = await message.answer(
-            searching_text,
-            disable_web_page_preview=False
+            searching_text
             )
 
         await message.bot.send_chat_action(message.chat.id, "typing")
