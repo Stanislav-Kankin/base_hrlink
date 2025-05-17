@@ -72,10 +72,19 @@ async def handle_question(message: Message):
                 "Пожалуйста, задайте более развернутый вопрос."
                 )
             return
+        searching_text = (
+            '⏳ Ищу ответ, смотрю в <a href="https://wiki.hr-link.ru/bin/view/Main/">базе знаний</a>, ожидайте...'
+            )
+        searching_text = "<b>Ищу ответ...</b>"
+        # Отправляем сообщение с HTML-разметкой
+        searching_msg = await message.answer(searching_text)
 
-        await message.answer("⏳ Ищу ответ...")
         await message.bot.send_chat_action(message.chat.id, "typing")
         answer = await get_answer(message.text)
+
+        # Удаляем сообщение "Ищу ответ..." перед отправкой ответа
+        await searching_msg.delete()
+        await message.bot.send_chat_action(message.chat.id, "typing")
         await message.answer(answer)
 
     except Exception as e:
