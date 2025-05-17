@@ -10,7 +10,10 @@ from utils.logging import logger
 async def main():
     bot = Bot(
         token=config.BOT_TOKEN,
-        default=DefaultBotProperties(parse_mode=ParseMode.HTML)
+        default=DefaultBotProperties(
+            parse_mode=ParseMode.HTML,
+            disable_web_page_preview=False
+            )
     )
 
     dp = Dispatcher()
