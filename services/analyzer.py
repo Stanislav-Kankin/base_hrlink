@@ -16,7 +16,7 @@ semaphore = asyncio.Semaphore(5)
 async def get_answer(question: str) -> str:
     """Получает ответ на вопрос из базы знаний"""
     try:
-        logger.info(f"Обработка вопроса: {question}")
+        logger.info(f"[!][!][!]Обработка вопроса: {question}")
 
         # Определяем раздел
         section = await classify_question(question)
