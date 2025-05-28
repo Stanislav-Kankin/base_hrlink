@@ -80,7 +80,8 @@ async def get_answer(question: str) -> str:
       При возможности вставляй в сообщение ссылки, в соответстии с темой, старайся смотерть по логике вопроса, возможно понадобится несколько ссылок:
 Перелючение в режим "Сотрудник" - https://wiki.hr-link.ru/bin/view/Main/Kadrovik-/Lichnyi-kabinet-/Perekliuchenie-v-rezhim-«Sotrudnik»-/
 Загрузить документ - https://wiki.hr-link.ru/bin/view/Main/Kadrovik-/Dokumenty-/Zagruzitь-dokument/
-Настроить маршрут согалсования документа - https://wiki.hr-link.ru/bin/view/Main/Kadrovik-/Dokumenty-/Nastroitь-marshrut-soglasovaniia-dokumenta-/
+Настроить маршрут согалсования документа - https://wiki.hr-link.ru/bin/view/Main/Kadrovik-/%40ObraSHCHeniia-v-sluzhbu-zaboty-o-klientakh-/%40Dobavitь-gibkii-marshrut-dokumentov-/
+Настроить маршрут согалсования заявления - https://wiki.hr-link.ru/bin/view/Main/Administrator-/Spravochniki-/Marshruty-zaiavlenii/
 Добавить в документ более одного сотрудника - https://wiki.hr-link.ru/bin/view/Main/Kadrovik-/Dokumenty-/Dobavitь-v-dokument-bolee-odnogo-sotrudnika-/
 Отправить документ на подпись - https://wiki.hr-link.ru/bin/view/Main/Kadrovik-/Dokumenty-/Otpravitь-dokument-na-podpisь/
 Удалить или аннулировать документ - https://wiki.hr-link.ru/bin/view/Main/Kadrovik-/Dokumenty-/Udalitь-ili-annulirovatь-dokument-/
