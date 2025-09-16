@@ -5,7 +5,7 @@ from utils.logging import logger
 
 client = AsyncOpenAI(
     api_key=config.PROXY_API_KEY,
-    base_url="https://api.proxyapi.ru/openai/v1"
+    base_url=config.PROXY_API_BASE_URL
 )
 
 SECTION_MAP = {

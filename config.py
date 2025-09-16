@@ -7,6 +7,7 @@ load_dotenv()
 class Config:
     BOT_TOKEN = os.getenv("BOT_TOKEN")
     PROXY_API_KEY = os.getenv("PROXY_API_KEY")
+    PROXY_API_BASE_URL = "https://openai.api.proxyapi.ru/v1"  # Новый URL
 
 
 config = Config()
