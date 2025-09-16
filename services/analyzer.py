@@ -179,7 +179,7 @@ Start Link 1C Автоматическая передача данных док�
 {knowledge}"""
 
         response = await client.chat.completions.create(
-            model="deepseek-chat",
+            model="o4-mini",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": question}
