@@ -7,7 +7,7 @@ import asyncio
 
 client = AsyncOpenAI(
     api_key=config.PROXY_API_KEY,
-    base_url="https://api.proxyapi.ru/o4-mini"
+    base_url="https://api.proxyapi.ru/openai/v1"
 )
 
 semaphore = asyncio.Semaphore(5)
