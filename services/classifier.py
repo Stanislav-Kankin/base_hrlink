@@ -371,7 +371,7 @@ Start Link - это отдельный продукт
 Вопрос: {question}"""
 
         response = await client.chat.completions.create(
-            model="openai/o4-mini",
+            model="openai/gpt-4.1-mini",
             messages=[{"role": "user", "content": prompt}],
             temperature=0.1,
             max_tokens=5000
