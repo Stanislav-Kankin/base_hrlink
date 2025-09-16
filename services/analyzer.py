@@ -179,7 +179,7 @@ Start Link 1C Автоматическая передача данных док�
 {knowledge}"""
 
         response = await client.chat.completions.create(
-            model="o4-mini",
+            model="openai/gpt-4o-mini",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": question}
