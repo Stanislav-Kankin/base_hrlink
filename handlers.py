@@ -14,6 +14,7 @@ from services.stats import (
     get_user_stats,
     get_daily_stats,
     get_popular_queries,
+    get_popular_sections,
     export_queries_to_excel,
     get_all_queries,
     get_all_users
@@ -34,7 +35,7 @@ async def handle_start(message: Message):
     await message.answer(
         "👋 Привет! Я - умный помощник компании HRlink.\n\n"
         "Задайте мне любой вопрос о нашей компании, продуктах или услугах, "
-        'и я постараюсь найти ответ в <u><b><a href="https://wiki.hr-link.ru/bin/view/Main/">базе знаний</a></b></u>.\n\n'
+        'и я постараюсь найти ответ в ''<u><b><a href="https://wiki.hr-link.ru/bin/view/Main/">базе знаний</a></b></u>.\n\n'
         "Обращайте внимание на <b><u>гиперссылки</u></b> в тексте ответа.\n"
         "В этих ссылках находится более полная статья по информации из базы знаний.\n\n"
         "<b>Просто пишите свой вопрос в чат!</b>\n\n"
@@ -82,7 +83,8 @@ async def handle_balance(message: Message):
             )
     except Exception as e:
         logger.error(f"Ошибка в обработчике баланса: {e}")
-        await message.answer("⚠️ Произошла внутренняя ошибка при проверке баланса.")
+        await message.answer(
+            "⚠️ Произошла внутренняя ошибка при проверке баланса.")
 
 
 @router.message(Command("stats"))
@@ -90,30 +92,48 @@ async def handle_stats(message: Message):
     logger.info(f"Вызов /stats от пользователя {message.from_user.id}")
     try:
         if message.from_user.id != 281146928:  # Замените на ваш ID
-            await message.answer("❌ Эта команда доступна только администратору.")
+            await message.answer(
+                "❌ Эта команда доступна только администратору.")
             return
+
         stats = get_user_stats()
         daily_stats = get_daily_stats(7)
-        popular_queries = get_popular_queries(5)
+        popular_sections = get_popular_sections(5)  # ← Используем новую функцию
+
         response = "📊 <b>Статистика бота</b>\n\n"
         response += f"👥 Всего пользователей: <b>{stats['total_users']}</b>\n"
         response += f"📝 Всего запросов: <b>{stats['total_queries']}</b>\n"
         response += f"🔥 Активных пользователей (30 дней): <b>{stats['active_users']}</b>\n"
         response += f"📈 Среднее количество запросов на пользователя: <b>{stats['avg_queries_per_user']:.1f}</b>\n\n"
+
         response += "📅 <b>Статистика за 7 дней:</b>\n"
         for day in daily_stats:
             response += f"  {day['date']}: {day['total_queries']} запросов, {day['unique_users']} пользователей\n"
-        response += "\n🔝 <b>Популярные запросы:</b>\n"
-        for i, (query, count) in enumerate(popular_queries, 1):
-            response += f"{i}. {query} ({count})\n\n"
+
+        response += "\n📚 <b>Популярные разделы:</b>\n"
+        if popular_sections:
+            for i, (section, count) in enumerate(popular_sections, 1):
+                section_display = section[:50] + "..." if len(section) > 50 else section
+                response += f"{i}. {section_display} ({count} запросов)\n"
+        else:
+            response += "📭 Разделы еще не анализировались\n"
+
         keyboard = InlineKeyboardMarkup(inline_keyboard=[
             [
-                InlineKeyboardButton(text="📊 Статистика за период", callback_data="stats_period"),
-                InlineKeyboardButton(text="👥 Список пользователей", callback_data="list_users"),
+                InlineKeyboardButton(
+                    text="📊 Статистика за период",
+                    callback_data="stats_period"),
+                InlineKeyboardButton(
+                    text="👥 Список пользователей",
+                    callback_data="list_users"),
             ],
-            [InlineKeyboardButton(text="📊 Выгрузить в Excel", callback_data="export_period")]
+            [InlineKeyboardButton(
+                text="📊 Выгрузить в Excel",
+                callback_data="export_period")]
         ])
+
         await message.answer(response, reply_markup=keyboard)
+
     except Exception as e:
         logger.error(f"Ошибка показа статистики: {e}")
         await message.answer("❌ Ошибка при получении статистики.")

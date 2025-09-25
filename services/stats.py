@@ -164,6 +164,25 @@ def get_popular_queries(limit: int = 10) -> List[Tuple[str, int]]:
         db.close()
 
 
+def get_popular_sections(limit: int = 10) -> List[Tuple[str, int]]:
+    """Получает самые популярные разделы/статьи."""
+    try:
+        db = SessionLocal()
+        popular = db.query(
+            UserQuery.section,
+            func.count().label('count')
+        ).filter(
+            UserQuery.section.isnot(None),
+            UserQuery.section != ''
+        ).group_by(UserQuery.section).order_by(func.count().desc()).limit(limit).all()
+        return [(section, count) for section, count in popular]
+    except Exception as e:
+        logger.error(f"Ошибка получения популярных разделов: {e}")
+        return []
+    finally:
+        db.close()
+
+
 def get_section_stats() -> Dict[str, int]:
     """Получает статистику по разделам"""
     try:
