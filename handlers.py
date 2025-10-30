@@ -45,6 +45,7 @@ async def handle_start(message: Message):
         "/stats - статистика бота (только для администратора)"
     )
 
+
 @router.message(Command("help"))
 async def handle_help(message: Message):
     await message.answer(
@@ -61,6 +62,7 @@ async def handle_help(message: Message):
         "/stats - статистика бота (только для администратора)\n\n"
         "<b>Просто напишите ваш вопрос в чат!</b>"
     )
+
 
 @router.message(Command("balance"))
 async def handle_balance(message: Message):
@@ -225,7 +227,6 @@ async def handle_export_period_request(message: Message, state: FSMContext):
         await message.answer("❌ Произошла ошибка при выгрузке данных.")
     
     await state.clear()
-
 
 
 @router.message(F.text & (
