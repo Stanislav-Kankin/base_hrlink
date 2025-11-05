@@ -8,8 +8,6 @@ from sqlalchemy.sql import func
 from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
 
-import os
-
 
 def save_user_query(
         user_id: int, username: str, first_name: str,
@@ -34,7 +32,9 @@ def save_user_query(
         db.add(query)
 
         # Обновляем статистику пользователя
-        user_stat = db.query(UserStat).filter(UserStat.user_id == user_id).first()
+        user_stat = db.query(UserStat).filter(
+            UserStat.user_id == user_id
+            ).first()
         if user_stat:
             user_stat.total_queries += 1
             user_stat.last_seen = datetime.utcnow()
@@ -50,12 +50,14 @@ def save_user_query(
 
         # Обновляем дневную статистику
         today = date.today()
-        daily_stat = db.query(DailyStat).filter(DailyStat.stat_date == today).first()
+        daily_stat = db.query(DailyStat).filter(
+            DailyStat.stat_date == today
+            ).first()
         if daily_stat:
             daily_stat.total_queries += 1
             # Обновляем самое популярное раздел
             if section:
-                # Здесь можно добавить логику для определения популярного раздела
+                # Здесь можно добавить логику
                 pass
         else:
             # Для нового дня нужно посчитать уникальных пользователей
@@ -69,7 +71,7 @@ def save_user_query(
                 unique_users=unique_users
             )
             db.add(daily_stat)
-        
+
         db.commit()
 
     except Exception as e:
@@ -86,7 +88,9 @@ def get_user_stats(user_id: int = None) -> Dict:
 
         if user_id:
             # Статистика конкретного пользователя
-            user_stat = db.query(UserStat).filter(UserStat.user_id == user_id).first()
+            user_stat = db.query(UserStat).filter(
+                UserStat.user_id == user_id
+                ).first()
             if user_stat:
                 return {
                     "user_id": user_stat.user_id,
@@ -101,7 +105,8 @@ def get_user_stats(user_id: int = None) -> Dict:
 
         # Общая статистика по всем пользователям
         total_users = db.query(UserStat).count()
-        total_queries = db.query(func.sum(UserStat.total_queries)).scalar() or 0
+        total_queries = db.query(func.sum(
+            UserStat.total_queries)).scalar() or 0
         active_users = db.query(UserStat).filter(
             UserStat.last_seen >= datetime.utcnow() - timedelta(days=30)
         ).count()
@@ -126,7 +131,7 @@ def get_daily_stats(days: int = 30) -> List[Dict]:
         db = SessionLocal()
 
         start_date = date.today() - timedelta(days=days)
-        
+
         stats = db.query(DailyStat).filter(
             DailyStat.stat_date >= start_date
         ).order_by(DailyStat.stat_date.desc()).all()
@@ -155,7 +160,9 @@ def get_popular_queries(limit: int = 10) -> List[Tuple[str, int]]:
         popular = db.query(
             UserQuery.question,
             func.count().label('count')
-        ).group_by(UserQuery.question).order_by(func.count().desc()).limit(limit).all()
+        ).group_by(
+            UserQuery.question
+            ).order_by(func.count().desc()).limit(limit).all()
         return [(q[0], q[1]) for q in popular]
     except Exception as e:
         logger.error(f"Ошибка получения популярных запросов: {e}")
